@@ -69,7 +69,8 @@ int main(){
                 break;
             case 4:
                 printf("学生信息链表的节点删除\n");
-                //head=delete_4(head);
+                head=delete_4(head);
+                break;
             case 5:
                 printf("学生信息链表的输出\n");
                 printf("1 屏幕输出\n"
@@ -86,7 +87,7 @@ int main(){
                         print_5_1(head);
                         break;
                     case 2:
-                        //print_5_2(head);
+                        print_5_2(head);
                         break;
                     case 0:
                         break;
@@ -94,7 +95,7 @@ int main(){
                 break;
             case 6:
                 printf("学生信息链表的查询\n");
-                //search_6(head);
+                search_6(head);
                 break;
             case 9:
                 system("cls");
@@ -326,6 +327,38 @@ struct stu *insert_3(struct stu * head){
     }
 }
 
+struct stu *delete_4(struct stu * head){
+    printf("输入要删除的学生的学号\n");
+    int num;
+    scanf("%d",&num);
+    int flag=1;
+    while (head->num==num){
+        flag=0;
+        head=head->next;
+    }
+    struct stu *pre=head;
+    struct stu *p=head->next;
+    while (p){
+        if (p->num==num){
+            pre->next=p->next;
+            free(p);
+            flag=0;
+            if (pre->next==NULL){
+                break;
+            }
+        }
+        pre=pre->next;
+        p=pre->next;
+    }
+    if (flag){
+        printf("该学生不存在\n");
+    }
+    else{
+        printf("已删除\n");
+    }
+    return head;
+}
+
 void print_5_1(struct stu *head){
     struct stu *p=head;
     while (p){
@@ -334,3 +367,38 @@ void print_5_1(struct stu *head){
     }
 }
 
+void print_5_2(struct stu * head){
+    printf("输入要写入链表的文件名\n");
+    char fname[50];
+    struct stu *p=head;
+    fflush(stdin);
+    gets(fname);
+    FILE *fp;
+    if ((fp=fopen(fname,"w"))==NULL){
+        printf("文件无法打开，读取失败\n");
+        exit(1);
+    }
+    while (p){
+        fprintf(fp,"%d\t%s\t%c\t%d\t%lf\n",p->num,p->name,p->sex,p->age,p->grade);
+        p=p->next;
+    }
+    printf("已写入%s文件\n",fname);
+}
+
+void search_6(struct stu * head){
+    struct stu *p=head;
+    printf("输入要查找的学生的学号\n");
+    int num;
+    scanf("%d",&num);
+    int flag=1;
+    while (p){
+        if (p->num==num){
+            printf("%d\t%s\t%c\t%d\t%lf\n",p->num,p->name,p->sex,p->age,p->grade);
+            flag=0;
+        }
+        p=p->next;
+    }
+    if (flag){
+        printf("未找到\n");
+    }
+}
