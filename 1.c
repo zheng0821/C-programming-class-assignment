@@ -186,6 +186,7 @@ struct stu *create_1_2(){
         p->age=age;
         printf("输入成绩\n");
         scanf("%lf",&grade);
+        p->grade=grade;
         if (head==NULL){
             head=p;
         }
