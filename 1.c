@@ -251,7 +251,7 @@ struct stu *sort_2(struct stu * head){
         }
         p=head->next;
         pre=head;
-        while (p->next){
+        while (p && p->next){
             if (p->grade<p->next->grade){
                 flag=1;
                 struct stu *temp=p->next;
@@ -259,8 +259,8 @@ struct stu *sort_2(struct stu * head){
                 temp->next=p;
                 pre->next=temp;
             }
-            p=p->next;
             pre=p;
+            p=p->next;
         }
     }
     printf("排序完毕！\n");
