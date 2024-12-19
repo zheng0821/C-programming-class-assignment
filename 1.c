@@ -237,30 +237,30 @@ struct stu *create_1_3(){
 
 //2.学生信息链表的节点排序
 struct stu *sort_2(struct stu * head){
-    struct stu *p=head->next;
-    struct stu *pre=head;
+    struct stu *p=NULL;
+    struct stu *pre=NULL;
     int flag=1;
     while (flag){
         flag=0;
-        p=head->next;
-        pre=head;
-        if (pre->grade<p->grade){
-            head=p;
-            struct stu *temp=p->next;
-            p->next=pre;
-            pre->next=temp;
+        if (head->grade<head->next->grade){
+            struct stu *temp=head->next;
+            head->next=temp->next;
+            temp->next=head;
+            head=temp;
             flag=1;
         }
+        p=head->next;
+        pre=head;
         while (p->next){
             if (p->grade<p->next->grade){
                 flag=1;
                 struct stu *temp=p->next;
-                pre->next=p->next;
-                p->next=p->next->next;
+                p->next=temp->next;
                 temp->next=p;
+                pre->next=temp;
             }
             p=p->next;
-            pre=pre->next;
+            pre=p;
         }
     }
     printf("排序完毕！\n");
