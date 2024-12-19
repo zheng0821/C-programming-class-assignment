@@ -127,6 +127,7 @@ void print_main_menu(){
    printf("请选择菜单功能：\n");
 }
 
+//1.1学生信息链表的建立（头插法）
 struct stu *create_1_1(){
     struct stu *head=NULL;
     struct stu *p=NULL;
@@ -160,6 +161,7 @@ struct stu *create_1_1(){
     return head;
 }
 
+//1.2学生信息链表的建立（尾插法）
 struct stu *create_1_2(){
     struct stu *head=NULL;
     struct stu *p=NULL;
@@ -198,6 +200,7 @@ struct stu *create_1_2(){
     return head;
 }
 
+//1.3学生信息链表的建立（读取文件建立链表）
 struct stu *create_1_3(){
     struct stu *p,*q,*head=NULL;
     FILE *fp;
@@ -231,6 +234,7 @@ struct stu *create_1_3(){
     return head;
 }
 
+//2.学生信息链表的节点排序
 struct stu *sort_2(struct stu * head){
     struct stu *p=head->next;
     struct stu *pre=head;
@@ -262,6 +266,7 @@ struct stu *sort_2(struct stu * head){
     return head;
 }
 
+//3.学生信息链表的节点插入
 struct stu *insert_3(struct stu * head){
     int order=0;
     int flag=1;
@@ -327,6 +332,7 @@ struct stu *insert_3(struct stu * head){
     }
 }
 
+//4.学生信息链表的节点删除
 struct stu *delete_4(struct stu * head){
     printf("输入要删除的学生的学号\n");
     int num;
@@ -359,6 +365,7 @@ struct stu *delete_4(struct stu * head){
     return head;
 }
 
+//5.1学生信息链表的输出（屏幕输出）
 void print_5_1(struct stu *head){
     struct stu *p=head;
     while (p){
@@ -367,6 +374,7 @@ void print_5_1(struct stu *head){
     }
 }
 
+//5.2学生信息链表的输出（保存链表至文件）
 void print_5_2(struct stu * head){
     printf("输入要写入链表的文件名\n");
     char fname[50];
@@ -383,8 +391,10 @@ void print_5_2(struct stu * head){
         p=p->next;
     }
     printf("已写入%s文件\n",fname);
+    fclose(fp);
 }
 
+//6.学生信息链表的查询
 void search_6(struct stu * head){
     struct stu *p=head;
     printf("输入要查找的学生的学号\n");
